@@ -1,0 +1,281 @@
+[
+  {
+    "city": {
+      "id": 2027749,
+      "name": "Amursk",
+      "coord": {
+        "lon": 136.9015,
+        "lat": 50.2299
+      },
+      "country": "RU",
+      "population": 46993
+    },
+    "cod": "200",
+    "message": 2.3736126,
+    "cnt": 5,
+    "list": [
+      {
+        "dt": 1531101600,
+        "temp": {
+          "day": 292.41,
+          "min": 291.34,
+          "max": 292.41,
+          "night": 291.34,
+          "eve": 292.41,
+          "morn": 292.41
+        },
+        "pressure": 1007.99,
+        "humidity": 69,
+        "weather": [
+          {
+            "id": 804,
+            "main": "Clouds",
+            "description": "overcast clouds",
+            "icon": "04n"
+          }
+        ],
+        "speed": 2.81,
+        "deg": 198,
+        "clouds": 88
+      },
+      {
+        "dt": 1531188000,
+        "temp": {
+          "day": 295.11,
+          "min": 289.99,
+          "max": 296.76,
+          "night": 292.38,
+          "eve": 295.82,
+          "morn": 289.99
+        },
+        "pressure": 1007.34,
+        "humidity": 60,
+        "weather": [
+          {
+            "id": 802,
+            "main": "Clouds",
+            "description": "scattered clouds",
+            "icon": "03d"
+          }
+        ],
+        "speed": 3.36,
+        "deg": 204,
+        "clouds": 32
+      },
+      {
+        "dt": 1531274400,
+        "temp": {
+          "day": 297.21,
+          "min": 290.87,
+          "max": 299.06,
+          "night": 292.12,
+          "eve": 297.77,
+          "morn": 290.87
+        },
+        "pressure": 1003.36,
+        "humidity": 61,
+        "weather": [
+          {
+            "id": 500,
+            "main": "Rain",
+            "description": "light rain",
+            "icon": "10d"
+          }
+        ],
+        "speed": 2.12,
+        "deg": 207,
+        "clouds": 8
+      },
+      {
+        "dt": 1531360800,
+        "temp": {
+          "day": 300.12,
+          "min": 292.13,
+          "max": 300.25,
+          "night": 294.49,
+          "eve": 298.81,
+          "morn": 292.13
+        },
+        "pressure": 998.79,
+        "humidity": 58,
+        "weather": [
+          {
+            "id": 801,
+            "main": "Clouds",
+            "description": "few clouds",
+            "icon": "02d"
+          }
+        ],
+        "speed": 2.27,
+        "deg": 181,
+        "clouds": 24
+      },
+      {
+        "dt": 1531447200,
+        "temp": {
+          "day": 293.51,
+          "min": 293.51,
+          "max": 296.43,
+          "night": 294.74,
+          "eve": 294.66,
+          "morn": 296.43
+        },
+        "pressure": 996.78,
+        "humidity": 0,
+        "weather": [
+          {
+            "id": 501,
+            "main": "Rain",
+            "description": "moderate rain",
+            "icon": "10d"
+          }
+        ],
+        "speed": 6.5,
+        "deg": 198,
+        "clouds": 100,
+        "rain": 8.7
+      }
+    ]
+  },
+
+  {
+    "city": {
+      "id": 524901,
+      "name": "Moscow",
+      "coord": {
+        "lon": 37.6177,
+        "lat": 55.7507
+      },
+      "country": "RU",
+      "population": 1000000
+    },
+    "cod": "200",
+    "message": 54.5906981,
+    "cnt": 5,
+    "list": [
+      {
+        "dt": 1531126800,
+        "temp": {
+          "day": 293.91,
+          "min": 289.13,
+          "max": 294.27,
+          "night": 289.13,
+          "eve": 294.27,
+          "morn": 293.91
+        },
+        "pressure": 1001.66,
+        "humidity": 74,
+        "weather": [
+          {
+            "id": 500,
+            "main": "Rain",
+            "description": "light rain",
+            "icon": "10d"
+          }
+        ],
+        "speed": 3.36,
+        "deg": 303,
+        "clouds": 36,
+        "rain": 1.11
+      },
+      {
+        "dt": 1531213200,
+        "temp": {
+          "day": 294.67,
+          "min": 289.96,
+          "max": 295.17,
+          "night": 291.02,
+          "eve": 294.93,
+          "morn": 289.96
+        },
+        "pressure": 1006.24,
+        "humidity": 77,
+        "weather": [
+          {
+            "id": 500,
+            "main": "Rain",
+            "description": "light rain",
+            "icon": "10d"
+          }
+        ],
+        "speed": 3.62,
+        "deg": 300,
+        "clouds": 80
+      },
+      {
+        "dt": 1531299600,
+        "temp": {
+          "day": 293.32,
+          "min": 290.33,
+          "max": 295.24,
+          "night": 290.33,
+          "eve": 295.12,
+          "morn": 290.91
+        },
+        "pressure": 1006.85,
+        "humidity": 89,
+        "weather": [
+          {
+            "id": 500,
+            "main": "Rain",
+            "description": "light rain",
+            "icon": "10d"
+          }
+        ],
+        "speed": 2.93,
+        "deg": 43,
+        "clouds": 80,
+        "rain": 1.74
+      },
+      {
+        "dt": 1531386000,
+        "temp": {
+          "day": 294.71,
+          "min": 289.17,
+          "max": 295.44,
+          "night": 290.76,
+          "eve": 294.64,
+          "morn": 289.17
+        },
+        "pressure": 1007.2,
+        "humidity": 70,
+        "weather": [
+          {
+            "id": 802,
+            "main": "Clouds",
+            "description": "scattered clouds",
+            "icon": "03d"
+          }
+        ],
+        "speed": 3.01,
+        "deg": 20,
+        "clouds": 36
+      },
+      {
+        "dt": 1531472400,
+        "temp": {
+          "day": 296.49,
+          "min": 290.71,
+          "max": 296.49,
+          "night": 290.71,
+          "eve": 294.04,
+          "morn": 294.56
+        },
+        "pressure": 1000.22,
+        "humidity": 0,
+        "weather": [
+          {
+            "id": 501,
+            "main": "Rain",
+            "description": "moderate rain",
+            "icon": "10d"
+          }
+        ],
+        "speed": 5.4,
+        "deg": 68,
+        "clouds": 51,
+        "rain": 7.35
+      }
+    ]
+  }
+]

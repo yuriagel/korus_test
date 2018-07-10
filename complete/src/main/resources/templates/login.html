@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+    <head>
+        <title>Пример формы безопасности.</title>
+    </head>
+    <link href="bundle.css" rel="stylesheet"/>
+    <body>
+
+        <div th:if="${param.error}">
+            Invalid username and password.
+        </div>
+        <div th:if="${param.logout}">
+            You have been logged out.
+        </div>
+        <div class="home-container" style="background-image: url('/app/images/pattern.svg');">
+        <form th:action="@{/login}" method="post">
+
+            <div class="zipcode-container" style="display: block">
+            <div><label>Пользователь (user) : <input class="form-control" type="text" name="username"/> </label></div>
+            <div><label>Пароль (password): <input class="form-control" type="password" name="password"/> </label></div>
+                <div><input type="submit" class="btn btn-success" style="margin: 10px; width: 100%;" value="Войти"/></div>
+            </div>
+        </form>
+    </div>
+    </body>
+</html>
