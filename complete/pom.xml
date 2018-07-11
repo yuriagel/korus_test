@@ -110,12 +110,12 @@
                             <nodeVersion>v6.9.1</nodeVersion>
                             <npmVersion>1.4.9
                             </npmVersion><!--именно такая версия есть в репозитории для этого плагина-->
-                            <nodeDownloadRoot>
+                           <!-- <nodeDownloadRoot>
                                 http://sbtnexus.ca.sbrf.ru:8081/nexus/content/repositories/nodejs_dist_proxy/
                             </nodeDownloadRoot>
                             <npmDownloadRoot>
                                 http://sbtnexus.ca.sbrf.ru:8081/nexus/content/repositories/nodejs_dist_proxy/npm/
-                            </npmDownloadRoot>
+                            </npmDownloadRoot>-->
                             <!--<installDirectory>target</installDirectory>-->
                         </configuration>
                         <executions>
