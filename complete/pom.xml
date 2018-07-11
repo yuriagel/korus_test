@@ -6,6 +6,7 @@
     <groupId>org.springframework</groupId>
     <artifactId>gs-rest-service</artifactId>
     <version>0.1.0</version>
+    <description>Тестовое задание для Корус</description>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -34,17 +35,6 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>com.jayway.jsonpath</groupId>
-            <artifactId>json-path</artifactId>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
-            <version>12.0</version>
-        </dependency>
-        <dependency>
             <groupId>org.json</groupId>
             <artifactId>json</artifactId>
             <version>20090211</version>
@@ -53,6 +43,9 @@
 
     <properties>
         <java.version>1.8</java.version>
+        <mvn.exe></mvn.exe>
+        <npm.g></npm.g>
+        <npm>npm${mvn.exe}</npm>
     </properties>
 
 
@@ -77,4 +70,211 @@
             <url>https://repo.spring.io/libs-release</url>
         </pluginRepository>
     </pluginRepositories>
+
+    <profiles>
+        <!-- автоопределение ос -->
+        <profile>
+            <id>windows-os</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+                <os>
+                    <family>Windows</family>
+                </os>
+            </activation>
+            <properties>
+                <mvn.exe>.cmd</mvn.exe>
+                <npm.g>-g</npm.g> <!--в винде нужно обновлять глобально. лень разбираться почему-->
+                <npm.install.dir>"C:\Program Files\nodejs\node.exe"
+                </npm.install.dir> <!--1 путь где ищем установленный в системе nodejs-->
+            </properties>
+        </profile>
+        <profile>
+            <id>include nodejs and npm</id>
+            <properties>
+                <npm>node/npm${mvn.exe}</npm>
+            </properties>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+                <file>
+                    <exists>node/npm</exists>
+                    <missing>${npm.install.dir}</missing>
+                </file>
+            </activation>
+            <build>
+                <plugins>
+                    <!--плагин для установки nodejs-->
+                    <plugin>
+                        <groupId>com.github.eirslett</groupId>
+                        <artifactId>frontend-maven-plugin</artifactId>
+                        <configuration>
+                            <nodeVersion>v6.9.1</nodeVersion>
+                            <npmVersion>1.4.9
+                            </npmVersion><!--именно такая версия есть в репозитории для этого плагина-->
+                            <nodeDownloadRoot>
+                                http://sbtnexus.ca.sbrf.ru:8081/nexus/content/repositories/nodejs_dist_proxy/
+                            </nodeDownloadRoot>
+                            <npmDownloadRoot>
+                                http://sbtnexus.ca.sbrf.ru:8081/nexus/content/repositories/nodejs_dist_proxy/npm/
+                            </npmDownloadRoot>
+                            <!--<installDirectory>target</installDirectory>-->
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>install node and npm</id>
+                                <goals>
+                                    <goal>install-node-and-npm</goal>
+                                </goals>
+                                <phase>validate</phase>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>exec-maven-plugin</artifactId>
+                        <version>1.5.0</version>
+                        <executions>
+                            <execution>
+                                <id>clean-npm</id>
+                                <phase>initialize</phase>
+                                <goals>
+                                    <goal>exec</goal>
+                                </goals>
+                                <configuration>
+                                    <executable>${npm}</executable>
+                                    <workingDirectory>.</workingDirectory>
+                                    <arguments>
+                                        <argument>prune</argument>
+                                    </arguments>
+                                </configuration>
+                            </execution>
+                            <!--npm install npm@4.0.3 1.НЕ МЕНЯТЬ ПОРЯДОК -->
+                            <execution>
+                                <id>update-npm</id>
+                                <phase>initialize</phase>
+                                <goals>
+                                    <goal>exec</goal>
+                                </goals>
+                                <configuration>
+                                    <executable>${npm}</executable>
+                                    <workingDirectory>.</workingDirectory>
+                                    <arguments>
+                                        <argument>install</argument>
+                                        <argument>npm@4.0.3</argument>
+                                        <argument>${npm.g}</argument>
+                                    </arguments>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>webpackServer</id> <!--вынес в отдельный профиль, чтобы можно было пропустить при сборке на jenkins в ветке develop-->
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>exec-maven-plugin</artifactId>
+                        <version>1.5.0</version>
+                        <executions>
+                            <!--npm set scripts-prepend-node-path true 1.1.НЕ МЕНЯТЬ ПОРЯДОК -->
+                            <execution>
+                                <id>configure-npm</id>
+                                <phase>initialize</phase>
+                                <goals>
+                                    <goal>exec</goal>
+                                </goals>
+                                <configuration>
+                                    <!--<workingDirectory>.</workingDirectory>-->
+                                    <executable>${npm}</executable>
+                                    <arguments>
+                                        <argument>config</argument>
+                                        <argument>set</argument>
+                                        <argument>scripts-prepend-node-path</argument>
+                                        <argument>true</argument>
+                                    </arguments>
+                                </configuration>
+                            </execution>
+                            <!--npm install sshpk (дурацкая зависимость, ломает сборку в linux) 2.НЕ МЕНЯТЬ ПОРЯДОК -->
+                            <execution>
+                                <id>prepare-npm sshpk</id>
+                                <phase>initialize</phase>
+                                <goals>
+                                    <goal>exec</goal>
+                                </goals>
+                                <configuration>
+                                    <!--<workingDirectory>.</workingDirectory>-->
+                                    <executable>${npm}</executable>
+                                    <arguments>
+                                        <argument>install</argument>
+                                        <argument>sshpk</argument>
+                                        <argument>--no-bin-links</argument>
+                                    </arguments>
+                                </configuration>
+                            </execution>
+
+                            <!--npm install 2.НЕ МЕНЯТЬ ПОРЯДОК -->
+
+                            <execution>
+                                <id>prepare-npm</id>
+                                <phase>initialize</phase>
+                                <goals>
+                                    <goal>exec</goal>
+                                </goals>
+                                <configuration>
+                                    <!--<workingDirectory>.</workingDirectory>-->
+                                    <executable>${npm}</executable>
+                                    <arguments>
+                                        <argument>install</argument>
+                                    </arguments>
+                                </configuration>
+                            </execution>
+
+                            <!--npm run-script webpackServer 3.НЕ МЕНЯТЬ ПОРЯДОК -->
+                            <execution>
+                                <id>prepare-web-resources</id>
+                                <phase>generate-resources</phase>
+                                <goals>
+                                    <goal>exec</goal>
+                                </goals>
+                                <configuration>
+                                    <!--<workingDirectory>.</workingDirectory>-->
+                                    <executable>${npm}</executable>
+                                    <arguments>
+                                        <argument>run</argument>
+                                        <argument>webpackServer</argument>
+                                    </arguments>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>build-helper-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <phase>generate-sources</phase>
+                                <goals>
+                                    <goal>add-source</goal>
+                                </goals>
+                                <configuration>
+                                    <sources>
+                                        <source>${project.build.directory}/nginx</source>
+                                    </sources>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+
+        </profile>
+
+
+    </profiles>
 </project>
